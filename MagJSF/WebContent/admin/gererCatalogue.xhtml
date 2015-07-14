@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templateAd.xhtml">
+	<ui:define name="content">
+
+
+		<p:commandButton id="typeProduit" value="Nouveau Type du Produit"
+			style=" margin-bottom:30px" type="button" />
+		<p:overlayPanel id="typeProduitPanel" for="typeProduit"
+			hideEffect="fade" dynamic="true"
+			style="width:600px; margin-bottom:30px">
+			<h:form>
+				<p:messages autoUpdate="true" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="type produit: " />
+					<p:inputText id="typeProduit" value="#{typeProduit.nom}" />
+
+				</h:panelGrid>
+				<p:commandButton value="ok" action="#{typeProduit.creer}"
+					style="margin-right:10px" />
+
+			</h:form>
+		</p:overlayPanel>
+
+		<p:commandButton id="categorie" value="Nouvelle Categorie"
+			type="button" />
+		<p:overlayPanel id="categoriePanel" for="categorie" hideEffect="fade"
+			dynamic="true" style="width:600px">
+			<h:form>
+				<p:messages autoUpdate="true" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="categorie: " />
+					<p:inputText id="nom" value="#{categorie.nom}" />
+				</h:panelGrid>
+				<p:commandButton value="ok" action="#{categorie.creer}"
+					style="margin-right:10px" />
+			</h:form>
+		</p:overlayPanel>
+		<p:commandButton id="catalogue" value="Nouveau Catalogue"
+			type="button" />
+		<p:overlayPanel id="cataloguePanel" for="catalogue" hideEffect="fade"
+			dynamic="true" style="width:600px">
+			<h:form>
+				<p:messages autoUpdate="true" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="Nom du catalogue: " />
+					<p:inputText id="nom" value="#{catalogue.nom}" />
+
+				</h:panelGrid>
+				<p:commandButton value="ok" action="#{catalogue.creer}"
+					style="margin-right:10px" />
+
+
+			</h:form>
+		</p:overlayPanel>
+		<h:form id="form">
+
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:panel header="choisir le type du Catalogue"
+				style="margin-bottom:20px;height:200px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:outputLabel for="categorie" value="Categorie: " />
+						<p:selectOneMenu id="categorie" value="#{catalogue.categorie}"
+							style="width:230px;margin-bottom:20px;margin-right:20px">
+
+							<f:selectItem itemLabel="Selectionner la catégorie" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{catalogue.categories}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="typeProduit" value="Type Produit: " />
+						<p:selectOneMenu id="typeProduit" value="#{catalogue.typeProduit}"
+							style="width:230px">
+							<f:selectItem itemLabel="Selectionner le type du produit"
+								itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{catalogue.typesProduits}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:commandButton value="Venez Découvrire le catalogue"
+						update="display" action="#{catalogue.consulterCatalogue()}"
+						style="width:200px" />
+				</h:panelGrid>
+
+
+
+
+
+
+			</p:panel>
+
+			<p:outputPanel id="display" >
+
+				
+					<p:dataGrid var="prod" value="#{catalogue.listProdByTypeAndCat}" 
+						columns="3" layout="grid" rows="6" paginator="true" id="produits"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="3,6,9" rendered="#{not empty catalogue.listProdByTypeAndCat}">
+
+						<f:facet name="header">
+            Produit aux vente
+        </f:facet>
+						<p:panel header="#{prod.nom}" style="text-align:center">
+							<h:panelGrid columns="2" style="width:100%">
+								<h:outputLabel for="marque" value="marque:" />
+								<h:outputText id="marque" value="#{prod.marque}" />
+								<h:outputLabel for="dateLimite" value="date limite:" />
+								<h:outputText id="dateLimite" value="#{prod.dateLimite}" />
+								<h:outputLabel for="proprietaire" value="Proprietaire:" />
+								<h:outputLink
+									value="http://localhost:8080/MagJSF/admin/profileClient.xhtml?client_id=#{prod.proprietaire.id}">
+									<h:outputText id="proprietaire"
+										value="#{prod.proprietaire.nom}" />
+								</h:outputLink>
+
+								<h:graphicImage
+									value="http://localhost:8080/MagJSF/DisplayImage?image_id=#{prod.id}"
+									width="150" height="150"></h:graphicImage>
+									<h:outputLink
+									value="http://localhost:8080/MagJSF/admin/produit.xhtml?prod_id=#{prod.id}">
+									<h:outputText id="voirPlus"
+										value="voir plus" />
+								</h:outputLink>
+								
+
+							</h:panelGrid>
+
+						</p:panel>
+
+					</p:dataGrid>
+					
+
+				
+
+
+
+			</p:outputPanel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

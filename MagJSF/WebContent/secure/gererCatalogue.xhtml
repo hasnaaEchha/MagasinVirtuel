@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Catalogue</title>
+</h:head>
+
+<h:body>
+
+	<p:commandButton id="movieBtn" value="Dynamic" type="button" />
+	<p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade"
+		dynamic="true" style="width:600px">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="attribut : " />
+				<p:inputText id="nom" value="#{attributTypeProduit.nom}" />
+
+			</h:panelGrid>
+			<p:commandButton value="ok" action="#{attributTypeProduit.creer}"
+				style="margin-right:10px" />
+		</h:form>
+	</p:overlayPanel>
+
+	<p:commandButton id="typeProduit" value="Type du Produit" type="button" />
+	<p:overlayPanel id="typeProduitPanel" for="typeProduit"
+		hideEffect="fade" dynamic="true" style="width:600px">
+		<h:form>
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="type produit: " />
+				<p:inputText id="typeProduit" value="#{typeProduit.nom}" />
+
+			</h:panelGrid>
+			<p:commandButton value="ok" action="#{typeProduit.creer}"
+				style="margin-right:10px" />
+
+		</h:form>
+	</p:overlayPanel>
+
+	<p:commandButton id="categorie" value="Categorie" type="button" />
+	<p:overlayPanel id="categoriePanel" for="categorie" hideEffect="fade"
+		dynamic="true" style="width:600px">
+		<h:form>
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="categorie: " />
+				<p:inputText id="nom" value="#{categorie.nom}" />
+
+
+				<p:outputLabel for="categorieMere" value="categorie mere:" />
+				<p:selectOneMenu id="categorieMere"
+					value="#{categorie.nomCategorieM}" effect="fold" editable="true">
+					<f:selectItem itemLabel="choisir une" itemValue="" />
+					<f:selectItems value="#{produit.categories}" />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+			
+			<p:commandButton value="ok" action="#{categorie.creer}"
+				style="margin-right:10px" />
+
+		</h:form>
+	</p:overlayPanel>
+		<p:commandButton id="catalogue" value="Catalogue" type="button" />
+	<p:overlayPanel id="cataloguePanel" for="catalogue" hideEffect="fade"
+		dynamic="true" style="width:600px">
+		<h:form>
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="Nom du catalogue: " />
+				<p:inputText id="nom" value="#{catalogue.nom}" />
+
+			</h:panelGrid>
+			<p:commandButton value="ok" action="#{catalogue.creer}"
+				style="margin-right:10px" />
+
+
+		</h:form>
+	</p:overlayPanel>
+</h:body>
+
+</html>

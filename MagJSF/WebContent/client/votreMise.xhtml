@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"	
+      xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/template.xhtml">
+	<ui:define name="content">
+	<h:form>
+	<p:messages autoUpdate="true" />
+		<h:panelGrid columns="2" cellpadding="5">
+			
+			<h:outputLabel for="prix" value="prix proposé:" style="font-weight:bold"/>                    
+            <p:inputText id="prix" value="#{offre.prix}" converterMessage="Cannot convert to double."/>
+           <p:message for="prix" />
+		</h:panelGrid>
+		<c:if test="${offre.ordre lt sysVar.maxMise}">	
+				
+				<p:commandButton value="ok" 
+				 action="#{offre.miser}"
+				style="margin-right:10px" >
+				<f:param name="id_prod" value="#{request.getParameter('id_prod')}"></f:param>
+				</p:commandButton>
+			</c:if>
+			<c:if test="${offre.ordre gt sysVar.maxMise}">
+			<p:outputLabel>Vous avez atteint le nombre maximal des mises  pour ce produit:#{sysVar.maxMise}</p:outputLabel>
+			</c:if>
+</h:form>
+</ui:define>
+</ui:composition>
+	
+</html>

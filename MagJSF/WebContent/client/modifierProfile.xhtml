@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template.xhtml">
+	<ui:define name="content">
+		<h:form>
+
+			<p:tab id="personal">
+				<p:panel header="Details personel" columnClasses="column" style="background-color: #4DA09D;">
+					<h:messages errorClass="error" />
+					<h:panelGrid columns="3">
+						<h:outputLink value="http://localhost:8080/MagJSF/DisplayImageClient?image_id=#{client.id}" target="_blank" >
+                        <h:graphicImage value="http://localhost:8080/MagJSF/DisplayImageClient?image_id=#{client.id}" width="150" height="150"></h:graphicImage>
+                        
+                    </h:outputLink>	
+						<h:outputText />
+						<h:outputText />
+						<h:outputText value="Nom: " />
+						
+						<h:inputText id="nom" value="#{client.nom}" />
+						
+						
+						<p:message for="nom" />
+						<h:outputText value="Prenom: " />
+						
+						<h:inputText id="prenom" value="#{client.prenom}"/>
+						
+						
+						<p:message for="prenom" />
+
+						<h:outputText value="login: " />
+
+						<h:inputText id="userName" value="#{client.userName}"
+							required="true" />
+
+						<p:message for="userName" />
+						<h:outputText value="mot de passe: " />
+
+						<h:inputSecret id="password" value="#{client.password}"
+							required="true" />
+
+						<p:message for="password" />
+						<h:outputText value="adresse: " />
+
+						<h:inputText id="addr" value="#{adresse.addr}" required="true" />
+
+						<p:message for="addr" />
+						<h:outputText value="Code Postale: " />
+
+						<h:inputText id="codePostale" value="#{adresse.codePostale}"
+							required="true" />
+
+						<p:message for="codePostale" />
+						<h:outputText value="ville: " />
+
+						<h:inputText id="ville" value="#{adresse.ville}" required="true" />
+
+						<p:message for="ville" />
+						<h:outputText value="Tel: " />
+
+						<h:inputText id="tel" value="#{client.tel}" />
+
+						<p:message for="tel" />
+						<h:outputText value="Email: " />
+
+						<h:inputText id="email" value="#{client.email}" required="true" />
+
+						<p:message for="email" />
+					</h:panelGrid>
+					
+				</p:panel>
+<p:commandButton value="modifier votre profil?" action="#{client.update}" style="margin-right:10px"
+						ajax="false" />			</p:tab>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

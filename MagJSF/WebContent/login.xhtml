@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="content">
+		<p:tooltip />
+		<h:form>
+
+			<p:tooltip />
+			<h:panelGrid columns="4" cellpadding="10" id="growl">
+
+				<h:outputText value="Email: " />
+
+				<p:inputText id="email" value="#{client.email}" />
+				<p:message for="email" display="icon" />
+				<h:outputLabel value="" />
+				<h:outputText value="mot de passe: " />
+				<p:password id="pwd" value="#{client.password}" />
+				<p:message for="pwd" display="icon" />
+				<p:commandButton value="ok" update="growl"
+					action="#{client.validerOperationClient}"
+					style="margin-left:10px;margin-top:5px;margin-bottom:13px;width:100px;height:35px; background-color: #181A1C" />
+			</h:panelGrid>
+
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

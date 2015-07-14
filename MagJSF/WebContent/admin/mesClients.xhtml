@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templateAd.xhtml">
+<ui:define name="content">
+	<h:form id="form">
+		<p:dataGrid var="cl" value="#{client.allClient}" columns="3"
+			layout="grid" rows="6" paginator="true" id="clients"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="3,6,9">
+
+			<f:facet name="header">
+            Clients
+        </f:facet>
+			<p:panel header="#{cl.userName}" style="text-align:center">
+				<h:panelGrid columns="2" style="width:100%">
+					<h:outputLabel for="nom" value="nom :" />
+					<h:outputText id="nom" value="#{cl.nom}" />
+					<h:outputLabel for="prenom" value="prenom:" />
+					<h:outputText id="prenom" value="#{cl.prenom}" />
+					<!-- a voir completement -->
+					<h:outputLink value="http://localhost:8080/MagJSF/admin/profileClient.xhtml?client_id=#{cl.id}" target="_blank" >
+						
+                        <h:graphicImage value="http://localhost:8080/MagJSF/DisplayImageClient?image_id=#{cl.id}" width="150" height="150"></h:graphicImage>
+                        
+                    </h:outputLink>	
+					
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>

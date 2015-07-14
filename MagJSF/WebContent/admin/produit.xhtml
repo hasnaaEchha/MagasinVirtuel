@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/templateAd.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+
+			<p:tab id="produit">
+				<p:panel header="Plus d'informations sur le produit"
+					columnClasses="column" style="background-color: #4DA09D;">
+					<h:messages errorClass="error" />
+					<h:panelGrid columns="3">
+
+						<h:outputLink
+							value="http://localhost:8080/MagJSF/DisplayImage?image_id=#{produit.urlIdProd().id}"
+							target="_blank">
+
+							<h:graphicImage
+								value="http://localhost:8080/MagJSF/DisplayImage?image_id=#{produit.produitUrl.id}"
+								width="150" height="150"></h:graphicImage>
+
+						</h:outputLink>
+						<h:outputText />
+						<h:outputText />
+						<h:outputText value="Nom: " />
+
+						<h:outputText id="nom" value="#{produit.produitUrl.nom} "
+							required="true" />
+
+
+						<p:message for="nom" />
+						<h:outputText value="Marque: " />
+
+						<h:outputText id="marque" value="#{produit.produitUrl.marque} "
+							required="true" />
+
+
+						<p:message for="marque" />
+
+						<h:outputText value="categorie: " />
+
+						<h:outputText id="categorie"
+							value="#{produit.produitUrl.categorie.nom } " required="true" />
+
+						<p:message for="categorie" />
+						<h:outputText value="Prix Minimal: " />
+
+						<h:outputText id="prixMin" value="#{produit.produitUrl.prixMin}"
+							required="true" />
+
+						<p:message for="prixMin" />
+
+						<h:outputText value="Vendeur : " />
+						<h:outputLink
+							value="http://localhost:8080/MagJSF/admin/profileClient.xhtml?client_id=#{produit.produitUrl.proprietaire.id}">
+							<h:outputText id="nomVendeur"
+								value="#{produit.produitUrl.proprietaire.nom}" required="true" />
+						</h:outputLink>
+						<p:message for="nomVendeur" />
+						<ui:param name="id" value="#{produit.produitUrl.id}" />
+
+						<p:commandButton value="supprimer"
+							action="#{catalogue.supprimerProduit(produit.id)}"
+							style="margin-right:10px">
+							
+							<p:confirm header="Confirmation"
+								message="vous etes sur de vouloir le supprimer?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+
+					</h:panelGrid>
+
+				</p:panel>
+			</p:tab>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

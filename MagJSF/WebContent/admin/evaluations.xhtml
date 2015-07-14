@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templateAd.xhtml">
+	<ui:define name="content">
+
+		<h:form id="form">
+			<p:dataGrid var="eval" value="#{evaluation.listEvaluation}"
+				columns="3" layout="grid" rows="6" paginator="true" id="produits"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="3,6,9">
+
+				<f:facet name="header">
+            Produit aux vente
+        </f:facet>
+				<p:panel header="#{eval.id}" style="text-align:center">
+					<h:panelGrid columns="2" style="width:100%">
+					<h:outputLink
+							value="http://localhost:8080/MagJSF/DisplayImage?image_id=#{eval.produit.id}"
+							target="_blank">
+							<h:graphicImage
+								value="http://localhost:8080/MagJSF/DisplayImage?image_id=#{eval.produit.id}"
+								width="150" height="50"></h:graphicImage>
+						</h:outputLink>
+						<h:outputLabel value="" />
+						<h:outputLabel for="client" value="client  :" />
+						<h:outputText id="marque" value="#{eval.client.nom}" />
+						<h:outputLabel for="produit" value="produit  :" />
+						<h:outputText id="produit" value="#{eval.produit.nom}" />
+						<h:outputLabel for="frais" value="Frais  :" />
+						<h:outputText id="frais" value="#{eval.frais}" />
+						<h:outputLabel value="Respect du délais de livraison  :" for="delai:" />
+						<h:outputText id="delai" value="#{eval.respectDelai}" />
+						<h:outputLabel for="credibilite" value="Credibilite du vendeur  :" />
+						<h:outputText id="credibilite" value="#{eval.credibilitClient}" />
+
+						
+						<p:commandButton value="supprimer"
+							action="#{evaluation.supprimerEvaluation(eval.id)}"
+							style="margin-right:10px" />
+					</h:panelGrid>
+				</p:panel>
+
+			</p:dataGrid>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

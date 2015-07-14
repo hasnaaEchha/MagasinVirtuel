@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="content">
+
+		<h:form enctype="multipart/form-data">
+		
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="nom" value="nom *:" />
+				<p:inputText id="nom" value="#{client.nom}" label="nom"
+					required="true" />
+				<p:message for="nom" display="icon" />
+				<h:outputLabel for="prenom" value="prenom : *" />
+				<h:inputText id="prenom" value="#{client.prenom}" required="true" />
+				<p:message for="prenom" display="icon"/>
+
+				<h:outputLabel for="userName" value="pseud name : *" />
+				<h:inputText id="userName" value="#{client.userName}"
+					required="true" />
+				<p:message for="userName" display="icon"/>
+
+
+				<h:outputLabel for="password" value="mot de passe: *" />
+				<p:password id="password" value="#{client.password}" required="true" />
+				<p:message for="password" display="icon"/>
+				<h:outputLabel for="confPassword"
+					value="confirmer le mot de passe: *" />
+				<p:password id="confPassword" value="#{client.confPassword}"
+					required="true" />
+				<p:message for="confPassword" display="icon"/>
+				<h:outputLabel for="addr" value="adresse: *" />
+				<h:inputText id="addr" value="#{adresse.addr}" required="true" />
+				<p:message for="addr" display="icon"/>
+
+				<h:outputLabel for="codePostale" value="Code Postale: *" />
+				<p:inputMask id="codePostale" value="#{adresse.codePostale}"
+					mask="27999" required="true" />
+				<p:message for="codePostale" display="icon"/>
+
+				<h:outputLabel for="ville" value="ville: *" />
+				<h:inputText id="ville" value="#{adresse.ville}" required="true" />
+				<p:message for="codePostale" display="icon"/>
+				
+
+				<h:outputLabel for="email" value="Email: *" />
+				<h:inputText id="email" value="#{client.email}" required="true" />
+				<p:message for="email" display="icon"/>
+				
+				<h:outputLabel for="tel" value="Tel: " />
+				<p:inputMask id="tel" value="#{client.tel}" mask="(099) 999-9999" />
+				<p:message for="tel" display="icon"/>
+			
+			
+				<p:outputLabel for="file"
+					value="choisir une image pour votre profil: " />
+				<p:fileUpload id="file" value="#{client.file}" mode="simple"
+					sizeLimit="1000000" fileLimit="1" multiple="false" required="true"/>
+				<p:message for="file" showSummary="false" display="icon"/>
+				<h:outputLabel  />
+				
+				<p:commandButton value="Submit" ajax="false" id="upload"
+					action="#{client.validerOperationClient}" />
+				
+				
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

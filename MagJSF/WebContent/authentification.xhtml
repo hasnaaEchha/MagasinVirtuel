@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head><title>authentification</title></h:head>
+
+<h:body>
+	<h:form>
+	<p:messages autoUpdate="true" />
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputText value="Email: "/>
+			<p:inputText  id="email" value="#{client.email}"/>
+			<h:outputText value="Basic: " />
+        	<p:password id="pwd" value="#{client.password}" />
+			
+		</h:panelGrid>
+					<p:commandButton value="ok" 
+				 action="#{client.doLogin}"
+				style="margin-right:10px" />
+		
+	</h:form>
+</h:body>
+</h:html>
+
+

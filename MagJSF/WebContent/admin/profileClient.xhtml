@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/templateAd.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+
+			<p:tab id="personal">
+				<p:panel header="Details personel" columnClasses="column"
+					style="background-color: #4DA09D;">
+					<h:messages errorClass="error" />
+					<h:panelGrid columns="3">
+#{clientInfo.clientById()}"
+						<h:outputLink
+							value="http://localhost:8080/MagJSF/DisplayImageClient?image_id=#{clientInfo.idClient}"
+							target="_blank">
+
+							<h:graphicImage
+								value="http://localhost:8080/MagJSF/DisplayImageClient?image_id=#{clientInfo.idClient}"
+								width="150" height="150"></h:graphicImage>
+
+						</h:outputLink>
+						<h:outputText />
+						<h:outputText />
+						<h:outputText value="Nom: " />
+
+						<h:outputText id="nom" value="#{clientInfo.client.nom} "
+							required="true" />
+
+
+						<p:message for="nom" />
+						<h:outputText value="Prenom: " />
+
+						<h:outputText id="prenom" value="#{clientInfo.client.prenom} "
+							required="true" />
+
+
+						<p:message for="prenom" />
+
+						<h:outputText value="login: " />
+
+						<h:outputText id="userName"
+							value="#{clientInfo.client.userName } " required="true" />
+
+						<p:message for="userName" />
+						<h:outputText value="mot de passe: " />
+
+						<h:outputText id="password" value="#{clientInfo.client.password}"
+							required="true" />
+
+						<p:message for="password" />
+						<h:outputText value="adresse: " />
+
+						<h:outputText id="addr" value="#{clientInfo.client.adresse.addr}"
+							required="true" />
+
+						<p:message for="addr" />
+						<h:outputText value="Code Postale: " />
+
+						<h:outputText id="codePostale"
+							value="#{clientInfo.client.adresse.codePostale}" required="true" />
+
+						<p:message for="codePostale" />
+						<h:outputText value="ville: " />
+
+						<h:outputText id="ville"
+							value="#{clientInfo.client.adresse.ville}" required="true" />
+
+						<p:message for="ville" />
+						<h:outputText value="Tel: " />
+
+						<h:outputText id="tel" value="#{clientInfo.client.tel}" />
+
+						<p:message for="tel" />
+						<h:outputText value="Email: " />
+
+						<h:outputText id="email" value="#{clientInfo.client.email}"
+							required="true" />
+
+						<p:message for="email" />
+						<p:commandButton value="supprimer"
+							action="#{client.supprimerClient(clientInfo.idClient)}"
+							style="margin-right:10px" >
+							<p:confirm header="Confirmation" message="vous etes sur de vouloir le supprimer?" icon="ui-icon-alert" />
+							</p:commandButton>
+
+
+					</h:panelGrid>
+
+				</p:panel>
+			</p:tab>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

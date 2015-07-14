@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templateAdmin.xhtml">
+		<ui:define name="content">
+			
+		
+		<h:form>
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="3" cellpadding="10">
+				<h:outputText value="Login: " />
+				<p:inputText id="email" value="#{client.email}" />
+				<h:outputLabel value="" />
+				<h:outputText value="Basic: " />
+				<p:password id="pwd" value="#{client.password}" />
+				
+			<p:commandButton value="ok" action="#{client.doLoginAdmin}"
+				style="margin-left:10px;margin-top:5px;margin-bottom:13px;width:100px;height:35px; background-color: #181A1C" />
+				
+			</h:panelGrid>
+			
+
+		</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

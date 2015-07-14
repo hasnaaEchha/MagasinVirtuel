@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templateAd.xhtml">
+	<ui:define name="content">
+		<h:form>
+
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:panel header="Select an item" style="margin-bottom:20px;" >
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="sujet" value="Sujet: " />
+					<p:selectOneMenu id="sujet" value="#{chart.sujet}"
+						style="width:200px;margin-bottom:20px;">
+						<p:ajax listener="#{chart.onSujetChange}" update="diagramme" />
+						<f:selectItem itemLabel="Select Sujet" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{chart.sujets}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="diagramme" value="type diagramme: " />
+					<p:selectOneMenu id="diagramme" value="#{chart.strategy}"
+						style="width:200px;margin-bottom:20px;">
+						<f:selectItem itemLabel="Select diagramme" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{chart.strategies}" />
+					</p:selectOneMenu>
+					<p:outputLabel />
+
+					<p:commandButton value="Submit" update="display"
+						actionListener="#{chart.modeliser}" ajax="false" style="width:200px"/>
+				</h:panelGrid>
+
+
+
+
+			</p:panel>
+
+			<p:outputPanel id="display">
+				<c:if test="${not empty chart.diag and chart.strategy=='Chart'}">
+					<p:chart type="bar" model="#{chart.diag}" style="height:300px" />
+				</c:if>
+				<c:if test="${not empty chart.diag and chart.strategy=='Linear'}">
+					<p:chart type="line" model="#{chart.diag}" style="height:300px;" />
+				</c:if>
+				<c:if test="${not empty chart.diag and chart.strategy=='Pie'}">
+					<p:chart type="pie" model="#{chart.diag}"
+						style="width:400px;height:300px" />
+				</c:if>
+
+
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
